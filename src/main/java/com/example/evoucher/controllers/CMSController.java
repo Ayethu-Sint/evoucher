@@ -13,7 +13,7 @@ public class CMSController {
     @Autowired
     private CMSService eVoucherService;
 
-    @PostMapping
+    @PostMapping("/saveEVoucher")
     public ResponseEntity<?> createEVoucher(@RequestBody EVoucher evoucher) {
         EVoucher e = eVoucherService.createEVoucher(evoucher);
         return ResponseEntity.status(HttpStatus.CREATED).body(e);
@@ -24,10 +24,10 @@ public class CMSController {
 //        eVoucherService.updateEVoucher(id, evoucher);
 //    }
 
-    @DeleteMapping("/{id}")
-    public void deactivateEVoucher(@PathVariable Long id) {
+    @GetMapping("/deactivateEVoucher")
+    public ResponseEntity<?> deactivateEVoucher(@RequestParam Long id) {
         eVoucherService.deactivateEVoucher(id);
+        return ResponseEntity.ok("Deleted");
     }
-
 
 }
