@@ -49,6 +49,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests((requests) -> requests
                 //.requestMatchers("/api/cms/**").permitAll()
                 .requestMatchers("/signIn").permitAll()
+                .requestMatchers("/getToken").permitAll()
                 .anyRequest().authenticated());
         http.sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

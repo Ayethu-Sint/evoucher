@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "44fbd329-4dc8-486d-8074-0c1203cde4d7",
+		"name": "EVoucher",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26068431",
+		"_collection_link": "https://solar-crater-700445.postman.co/workspace/Testing-Projects~599d6546-eaa3-4df4-99d9-8556949f8e3c/collection/26068431-44fbd329-4dc8-486d-8074-0c1203cde4d7?action=share&source=collection_link&creator=26068431"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/signIn",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczNzE3NDA0NSwiZXhwIjoxNzM3NDc0MDQ1fQ.6MfDVHeqjm8Aaf_F9kdLQe8ZvjxZvhqc_V9mROHBGBk",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/signIn",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"signIn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/getToken",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/getToken",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/cms/saveEVoucher",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczNzIxMjIyMSwiZXhwIjoxNzM3Mjk4NjIxfQ.0x-InDOO_uVQnDV_j8j0qFc5iEPIAQMhtnAhDjbOkP4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Buy One Get One Free\",\r\n  \"description\": \"Get two items for the price of one!\",\r\n  \"expiryDate\": \"2025-12-31\",\r\n  \"amount\": 10.0,\r\n  \"imageUrl\": \"https://example.com/images/evoucher.png\",\r\n  \"paymentMethod\": \"VISA\",\r\n  \"paymentDiscountPercentage\": 20,\r\n  \"quantity\": 2,\r\n  \"buyType\": \"MySelf_Only\", // Enum value\r\n  \"name\": \"John Doe\",\r\n  \"phoneNumber\": \"+1234567890\",\r\n  \"maxLimitPerUser\": 5,\r\n  \"giftLimitPerUser\": 3,\r\n  \"is_active\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/cms/saveEVoucher",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cms",
+						"saveEVoucher"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/cms/deactivateEVoucher?id=1",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczNzE3NTgwNCwiZXhwIjoxNzM3MjYyMjA0fQ.aYoNYCAXTvvm5SIUTlBkXnQ-mS8IvcX1en5Am-QL6CA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/cms?id=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cms"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

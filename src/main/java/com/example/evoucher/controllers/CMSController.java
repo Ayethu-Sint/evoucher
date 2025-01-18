@@ -1,11 +1,14 @@
 package com.example.evoucher.controllers;
 
+import com.example.evoucher.BuyType;
 import com.example.evoucher.entities.EVoucher;
 import com.example.evoucher.services.CMSService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/cms")
@@ -15,6 +18,16 @@ public class CMSController {
 
     @PostMapping("/saveEVoucher")
     public ResponseEntity<?> createEVoucher(@RequestBody EVoucher evoucher) {
+        int existingQuantity = Optional.ofNullable(eVoucherService.findTotalQuantityByPhoneNumber(evoucher.getPhoneNumber()))
+                .orElse(0);
+        int limitPerUser = evoucher.getBuyType().equals(BuyType.Gift_To_Others)
+                ? evoucher.getGiftLimitPerUser()
+                : evoucher.getMaxLimitPerUser();
+
+        if (evoucher.getQuantity() > limitPerUser || existingQuantity > limitPerUser) {
+            int availableQuantity = limitPerUser - existingQuantity;
+            return ResponseEntity.ok(String.format("Available quantity is %d.", availableQuantity));
+        }
         EVoucher e = eVoucherService.createEVoucher(evoucher);
         return ResponseEntity.status(HttpStatus.CREATED).body(e);
     }
@@ -24,10 +37,10 @@ public class CMSController {
 //        eVoucherService.updateEVoucher(id, evoucher);
 //    }
 
-    @GetMapping("/deactivateEVoucher")
-    public ResponseEntity<?> deactivateEVoucher(@RequestParam Long id) {
+    @GetMapping
+    public String deactivateEVoucher(@RequestParam Long id) {
         eVoucherService.deactivateEVoucher(id);
-        return ResponseEntity.ok("Deleted");
+        return "Deleted";
     }
 
 }

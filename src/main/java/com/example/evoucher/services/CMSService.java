@@ -1,5 +1,6 @@
 package com.example.evoucher.services;
 
+import com.example.evoucher.BuyType;
 import com.example.evoucher.entities.EVoucher;
 import com.example.evoucher.repositories.CMSRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -22,10 +23,10 @@ public class CMSService{
     // Create eVoucher
     @Transactional
     public EVoucher createEVoucher(EVoucher evoucher) {
-        boolean newVoucher = evoucher.getId() == null || evoucher.getId() <= 0;
+        //boolean newVoucher = evoucher.getId() == null || evoucher.getId() <= 0;
         eVoucherRepository.save(evoucher);
-        if(newVoucher)
-            promoCodeService.generatePromoCodes(evoucher, evoucher.getQuantity());
+//        if(newVoucher)
+//            promoCodeService.generatePromoCodes(evoucher, evoucher.getQuantity());
         return evoucher;
     }
 
@@ -69,5 +70,10 @@ public class CMSService{
     // Get eVoucher by ID
     public EVoucher getEVoucherDetail(Long id) {
         return eVoucherRepository.findById(id).orElseThrow(() -> new RuntimeException("eVoucher not found"));
+    }
+
+    // Get Total Quantity by Phone Number
+    public Integer findTotalQuantityByPhoneNumber(String phoneNumber){
+        return eVoucherRepository.findTotalQuantityByPhoneNumber(phoneNumber);
     }
 }
