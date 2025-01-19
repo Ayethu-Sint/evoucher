@@ -48,6 +48,7 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
                 //.requestMatchers("/api/cms/**").permitAll()
+                //.requestMatchers("/api/estore/getEVoucher").permitAll()
                 .requestMatchers("/signIn").permitAll()
                 .requestMatchers("/getToken").permitAll()
                 .anyRequest().authenticated());

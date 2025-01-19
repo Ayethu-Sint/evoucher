@@ -3,11 +3,13 @@ package com.example.evoucher.controllers;
 import com.example.evoucher.BuyType;
 import com.example.evoucher.entities.EVoucher;
 import com.example.evoucher.services.CMSService;
+import com.google.zxing.WriterException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @RestController
@@ -17,7 +19,7 @@ public class CMSController {
     private CMSService eVoucherService;
 
     @PostMapping("/saveEVoucher")
-    public ResponseEntity<?> createEVoucher(@RequestBody EVoucher evoucher) {
+    public ResponseEntity<?> createEVoucher(@RequestBody EVoucher evoucher) throws IOException, WriterException {
         int existingQuantity = Optional.ofNullable(eVoucherService.findTotalQuantityByPhoneNumber(evoucher.getPhoneNumber()))
                 .orElse(0);
         int limitPerUser = evoucher.getBuyType().equals(BuyType.Gift_To_Others)
@@ -37,10 +39,16 @@ public class CMSController {
 //        eVoucherService.updateEVoucher(id, evoucher);
 //    }
 
-    @GetMapping
+    @GetMapping("/deactivateEVoucher")
     public String deactivateEVoucher(@RequestParam Long id) {
         eVoucherService.deactivateEVoucher(id);
         return "Deleted";
+    }
+
+    @GetMapping
+    public String setUsedPromoCode(@RequestParam Long promoCodeId) {
+        eVoucherService.setUsedPromoCode(promoCodeId);
+        return "Used Promo Code";
     }
 
 }
