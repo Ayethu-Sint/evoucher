@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "localhost:8080/signIn",
+			"name": "/signIn",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -45,7 +45,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:8080/getToken",
+			"name": "/getToken",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -66,7 +66,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:8080/api/cms/saveEVoucher",
+			"name": "/saveEVoucher",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -75,13 +75,13 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczNzIxMjIyMSwiZXhwIjoxNzM3Mjk4NjIxfQ.0x-InDOO_uVQnDV_j8j0qFc5iEPIAQMhtnAhDjbOkP4",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczNzI3ODQxOCwiZXhwIjoxNzM3MzY0ODE4fQ.KO26rWgHcjcX_lLO2Aw_u4RqnAnZv0MbT6fyL3aXYHI",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"title\": \"Buy One Get One Free\",\r\n  \"description\": \"Get two items for the price of one!\",\r\n  \"expiryDate\": \"2025-12-31\",\r\n  \"amount\": 10.0,\r\n  \"imageUrl\": \"https://example.com/images/evoucher.png\",\r\n  \"paymentMethod\": \"VISA\",\r\n  \"paymentDiscountPercentage\": 20,\r\n  \"quantity\": 2,\r\n  \"buyType\": \"MySelf_Only\", // Enum value\r\n  \"name\": \"John Doe\",\r\n  \"phoneNumber\": \"+1234567890\",\r\n  \"maxLimitPerUser\": 5,\r\n  \"giftLimitPerUser\": 3,\r\n  \"is_active\": true\r\n}",
+					"raw": "{\r\n    \"id\": null,\r\n  \"title\": \"Buy One Get One Free\",\r\n  \"description\": \"Get two items for the price of one!\",\r\n  \"expiryDate\": \"2025-12-31\",\r\n  \"amount\": 10.0,\r\n  \"imageUrl\": \"https://example.com/images/evoucher.png\",\r\n  \"paymentMethod\": \"VISA\",\r\n  \"paymentDiscountPercentage\": 20,\r\n  \"quantity\": 2,\r\n  \"buyType\": \"MySelf_Only\", // Enum value\r\n  \"name\": \"John Doe\",\r\n  \"phoneNumber\": \"+1234567890\",\r\n  \"maxLimitPerUser\": 5,\r\n  \"giftLimitPerUser\": 3,\r\n  \"is_active\": true\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -104,7 +104,45 @@
 			"response": []
 		},
 		{
-			"name": "localhost:8080/api/cms/deactivateEVoucher?id=1",
+			"name": "/updateEVoucher",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczNzIxMjIyMSwiZXhwIjoxNzM3Mjk4NjIxfQ.0x-InDOO_uVQnDV_j8j0qFc5iEPIAQMhtnAhDjbOkP4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n  \"title\": \"Buy One Get One Free\",\r\n  \"description\": \"Get two items for the price of one!\",\r\n  \"expiryDate\": \"2025-12-31\",\r\n  \"amount\": 10.0,\r\n  \"imageUrl\": \"https://example.com/images/evoucher.png\",\r\n  \"paymentMethod\": \"VISA\",\r\n  \"paymentDiscountPercentage\": 20,\r\n  \"quantity\": 2,\r\n  \"buyType\": \"MySelf_Only\", // Enum value\r\n  \"name\": \"John Doe\",\r\n  \"phoneNumber\": \"+1234567890\",\r\n  \"maxLimitPerUser\": 5,\r\n  \"giftLimitPerUser\": 3,\r\n  \"is_active\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/cms/saveEVoucher",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cms",
+						"saveEVoucher"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/deactivateEVoucher?id=1",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -118,20 +156,121 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:8080/api/cms?id=1",
+					"raw": "localhost:8080/api/cms/deactivateEVoucher?id=1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"api",
-						"cms"
+						"cms",
+						"deactivateEVoucher"
 					],
 					"query": [
 						{
 							"key": "id",
 							"value": "1"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getAllEVouchers",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczNzIxMjg3OSwiZXhwIjoxNzM3Mjk5Mjc5fQ.OKOsuWdGphBW6mXxmuKIApH2H6Pyr20BOe10VFIz3sQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/estore",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"estore"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getEVoucherDetail",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczNzI4Njc2MCwiZXhwIjoxNzM3MzczMTYwfQ.SrkaqMDJSnxP1WihC1fulLkYjEpez2YC6tuRZKbUU9Y",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/estore?id=3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"estore"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getEVoucherListByPurchase",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczNzIxMjg3OSwiZXhwIjoxNzM3Mjk5Mjc5fQ.OKOsuWdGphBW6mXxmuKIApH2H6Pyr20BOe10VFIz3sQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"used\": false,\r\n  \"eVoucherId\": [3]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/estore/getEVoucher",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"estore",
+						"getEVoucher"
 					]
 				}
 			},
