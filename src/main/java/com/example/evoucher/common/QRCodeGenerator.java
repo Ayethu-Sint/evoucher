@@ -40,16 +40,19 @@ public class QRCodeGenerator {
         String projectPath = System.getProperty("user.dir");
         File file = new File(projectPath + filePath);
         if(!file.exists()) {
-            throw new IOException("File not found: " + file.getAbsolutePath());
+            //throw new IOException("File not found: " + file.getAbsolutePath());
+            return null;
         }
         BufferedImage bufferedImage = ImageIO.read(file);
 
         // Convert the image to a byte array
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ImageIO.write(bufferedImage, "PNG", byteArrayOutputStream);
-        byte[] imageBytes = byteArrayOutputStream.toByteArray();
-
-        return imageBytes;
+        if(bufferedImage != null) {
+            ImageIO.write(bufferedImage, "PNG", byteArrayOutputStream);
+            byte[] imageBytes = byteArrayOutputStream.toByteArray();
+            return imageBytes;
+        }
+        return null;
     }
 
 
